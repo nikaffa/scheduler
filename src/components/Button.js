@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from "classnames"; //utility to join classNames together
-
 import "components/Button.scss";
 
 export default function Button(props) {
