@@ -6,11 +6,11 @@ const InterviewerList = (props) => {
   //renders multiple components using map 
   const newList = props.interviewers.map(interviewer => 
     <InterviewerListItem 
-    key={interviewer.id} 
+    key={interviewer.id}
     name={interviewer.name}
     avatar = {interviewer.avatar}
-    selected={interviewer.id === props.interviewer}
-    setInterviewer={props.setInterviewer}
+    selected={interviewer.id === props.value}
+    setInterviewer={() => props.onChange(interviewer.id)}
     /> 
   );
 
