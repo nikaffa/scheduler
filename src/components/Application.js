@@ -21,7 +21,10 @@ export default function Application(props) {
     //getInterview returns an object that contains the interview data if it is passed an object that contains an interviewer
     const interview = getInterview(state, app.interview);
     return (
-      <Appointment key={app.id} {...app}/>
+      <Appointment
+      key={app.id}
+      interview={interview}
+      {...app}/>
     )    
   });
 
