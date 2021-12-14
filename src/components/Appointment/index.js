@@ -16,6 +16,7 @@ const Appointment = (props) => {
   const SAVING = "SAVING";
   const DELETING = "DELETING";
   const CONFIRM = "CONFIRM";
+  const EDIT = "EDIT";
 
   //conditinally renders a mode within calling useVisualMode:
   //if props.interview contains a value, pass useVisualMode the SHOW mode, otherwise, pass EMPTY
@@ -48,8 +49,9 @@ const Appointment = (props) => {
     <article className="appointment">
       <Header time={props.time}/>
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === SHOW && <Show student={props.interview.student} interviewer={props.interview.interviewer} onDelete={() => transition(CONFIRM, true)}/>}
+      {mode === SHOW && <Show student={props.interview.student} interviewer={props.interview.interviewer} onEdit={() => transition(EDIT, true)} onDelete={() => transition(CONFIRM, true)}/>}
       {mode === CREATE && <Form interviewers={props.interviewers} onCancel={() => back(EMPTY)} onSave={save}/>}
+      {mode === EDIT && <Form student={props.interview.student} interviewers={props.interviewers} onCancel={() => transition(SHOW)} onSave={save}/>}
       {mode === SAVING && <Status message="Saving..."/>}
       {mode === DELETING && <Status message="Deleting..."/>}
       {mode === CONFIRM && <Confirm onCancel={() => transition(SHOW)} onConfirm={deleting} message="Are you sure you want to delete?"/>}
