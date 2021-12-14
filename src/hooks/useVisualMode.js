@@ -1,14 +1,13 @@
-//Custom hook
+//Custom hook, takes an initial argument to set the mode state, returns an object with a mode property
 import { useState } from "react";
 
-//Takes an initial argument to set the mode state, returns an object with a mode property
 export default function useVisualMode(initial) {
-  //Sets the mode state with the initial mode
+  //sets the mode state with the initial mode
   const [mode, setMode] = useState(initial);
-  //Keeps track of the modes history
+  //keeps track of the modes history
   const [history, setHistory] = useState([initial]);
 
-  //Takes in a new mode and updates the mode state with the new value
+  //takes in a new mode and updates the mode state with the new value
   const transition = function(mode, replace = false) {
     setMode(mode);
 
@@ -23,11 +22,11 @@ export default function useVisualMode(initial) {
     });
   };
 
-  //Allows us to go back to the previous mode
+  //allows us to go back to the previous mode
   const back = function() {
     if (history.length > 1) {
 
-    //set the mode to the previous item in the history array
+    //sets the mode to the previous item in the history array
     setHistory((prev) => {
       const newHistory = [...prev];
       newHistory.pop();
