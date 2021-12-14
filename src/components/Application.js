@@ -26,16 +26,23 @@ export default function Application(props) {
   const bookInterview = (id, interview) => {
     const appointment = {...state.appointments[id], interview: { ...interview }};
     const appointments = {...state.appointments, [id]: appointment };
-    //updates the state object with new value
-    //setState({ ...state, appointments });
 
     //makes a PUT request to update the database with the interview data
     return axios
     .put(`/api/appointments/${id}`, {interview})
     .then(res => setState({ ...state, appointments }))
     .catch((err) => console.log(err.response.data)); 
-    //console.log('bookInterview', id, interview);
   };
+
+ //makes a HTTP request to delete interview data from database and sets its state to null when delete an interview
+  const cancelInterview = (id) => {
+    const appointment = {...state.appointments[id], interview: null};
+    
+    return axios
+    .delete(`/api/appointments/${id}`)
+    .then(res => setState(prev => ({ ...prev, appointments: {...prev.appointments, appointment} })))
+    .catch((err) => console.log(err.response.data)); 
+  }
 
   const schedule = appointments.map(app => {
     //getInterview returns an object that contains the interview data if it is passed an object that contains an interviewer
@@ -50,6 +57,7 @@ export default function Application(props) {
       interview={interview}
       interviewers={interviewers}
       bookInterview={bookInterview}
+      cancelInterview={cancelInterview}
       
       />
     )    
