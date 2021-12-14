@@ -13,21 +13,45 @@ export default function Application(props) {
     appointments: {},
     interviewers: {}
   });
+
+  // updates the dayList
   const setDay = day => setState(prev => ({ ...prev, day }));
 
+  // creates an array of appointments for the given day
   const appointments = getAppointmentsForDay(state, state.day);
+  // creates interviewers for the given day
   const interviewers = getInterviewersForDay(state, state.day);
+
+  //makes an HTTP request and updates the local state when new interview is booked
+  const bookInterview = (id, interview) => {
+    const appointment = {...state.appointments[id], interview: { ...interview }};
+    const appointments = {...state.appointments, [id]: appointment };
+    //updates the state object with new value
+    //setState({ ...state, appointments });
+
+    //makes a PUT request to update the database with the interview data
+    return axios
+    .put(`/api/appointments/${id}`, {interview})
+    .then(res => setState({ ...state, appointments }))
+    .catch((err) => console.log(err.response.data)); 
+    //console.log('bookInterview', id, interview);
+  };
 
   const schedule = appointments.map(app => {
     //getInterview returns an object that contains the interview data if it is passed an object that contains an interviewer
     const interview = getInterview(state, app.interview);
+    //console.log('interview', interview)
     
     return (
       <Appointment
       key={app.id}
+      id={app.id}
+      time={app.time}
       interview={interview}
       interviewers={interviewers}
-      {...app}/>
+      bookInterview={bookInterview}
+      
+      />
     )    
   });
 
@@ -38,7 +62,7 @@ export default function Application(props) {
       axios.get('/api/interviewers')
     ])
     .then((all) => {
-      console.log(all[2].data);
+      //console.log(all[2].data);
       setState(prev => ({
         ...prev,
         days: all[0].data,

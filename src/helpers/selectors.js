@@ -70,6 +70,6 @@ export function getInterview(state, interview) {
       }  
     }
   }
-  //console.log(newInterview)
+  //console.log('newInterview',newInterview)
   return newInterview;
 }
