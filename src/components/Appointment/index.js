@@ -51,7 +51,7 @@ const Appointment = (props) => {
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && <Show student={props.interview.student} interviewer={props.interview.interviewer} onEdit={() => transition(EDIT, true)} onDelete={() => transition(CONFIRM, true)}/>}
       {mode === CREATE && <Form interviewers={props.interviewers} onCancel={() => back(EMPTY)} onSave={save}/>}
-      {mode === EDIT && <Form student={props.interview.student} interviewers={props.interviewers} onCancel={() => transition(SHOW)} onSave={save}/>}
+      {mode === EDIT && <Form student={props.interview.student} interviewers={props.interviewers} interviewer={props.interview.interviewer.id} onCancel={() => transition(SHOW)} onSave={save}/>}
       {mode === SAVING && <Status message="Saving..."/>}
       {mode === DELETING && <Status message="Deleting..."/>}
       {mode === CONFIRM && <Confirm onCancel={() => transition(SHOW)} onConfirm={deleting} message="Are you sure you want to delete?"/>}
