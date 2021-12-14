@@ -31,7 +31,7 @@ export default function Application(props) {
     return axios
     .put(`/api/appointments/${id}`, {interview})
     .then(res => setState({ ...state, appointments }))
-    .catch((err) => console.log(err.response.data)); 
+    //.catch((err) => console.log(err.response.data)); 
   };
 
  //makes a HTTP request to delete interview data from database and sets its state to null when delete an interview
@@ -41,7 +41,7 @@ export default function Application(props) {
     return axios
     .delete(`/api/appointments/${id}`)
     .then(res => setState(prev => ({ ...prev, appointments: {...prev.appointments, appointment} })))
-    .catch((err) => console.log(err.response.data)); 
+    //.catch((err) => console.log(err.response.data)); 
   }
 
   const schedule = appointments.map(app => {
