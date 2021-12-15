@@ -21,16 +21,43 @@ export default function useApplicationData(initial) {
     //makes a PUT request to update the database with the interview data
     return axios
     .put(`/api/appointments/${id}`, {interview})
-    .then(res => setState({ ...state, appointments }))
+    .then(res => {
+
+      //updates the spots remaining when save the appointment
+      setState(prev => {
+        const days = prev.days.map(day => {
+          if(day.name === prev.day) {
+            day.spots -- ;
+          }
+          return day;
+        });
+        return { ...prev, appointments, days };
+      });
+      
+    })
   };
 
  //makes a HTTP request to delete interview data from database and sets its state to null when delete an interview
   const cancelInterview = (id) => {
     const appointment = {...state.appointments[id], interview: null};
+    const appointments = {...state.appointments, [id]: appointment };
     
     return axios
     .delete(`/api/appointments/${id}`)
-    .then(res => setState(prev => ({ ...prev, appointments: {...prev.appointments, appointment} })))
+    .then(res => {
+      //before: setState(prev => ({ ...prev, appointments: {...prev.appointments, appointment} })))
+
+      //updates the spots remaining when delete the appointment
+      setState(prev => {
+        const days = prev.days.map(day => {
+          if(day.name === prev.day) {
+            day.spots ++;
+          }
+          return day;
+        });
+        return { ...prev, appointments, days };
+      });
+    })
   };
 
   useEffect(() => {
@@ -50,3 +77,13 @@ export default function useApplicationData(initial) {
 
   return { state, setDay, bookInterview, cancelInterview }
 };
+
+
+//updates the spots remaining
+      // let newSpots = 0;
+      // if(state.appointments[id].interview === null) {
+      //   newSpots = state.days.spots + 1;
+      // }else{
+      //   newSpots = state.days.spots - 1;
+      // }
+      //setDay(prev => ({ ...prev, spots: newSpots}))
