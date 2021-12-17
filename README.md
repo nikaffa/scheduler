@@ -3,6 +3,10 @@
 
 ## Final Product
 
+### Main page
+!["Main page"](https://github.com/nikaffa/scheduler/blob/master/docs/Scheduler_mainPage.png)
+
+### Users scan create, edit, and cancel interviews
 !["Users scan create, edit, and cancel interviews"](https://github.com/nikaffa/scheduler/blob/master/docs/Scheduler.gif)
 
 ## Dependencies
