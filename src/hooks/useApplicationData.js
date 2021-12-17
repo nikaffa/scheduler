@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useApplicationData(initial) {
+export default function useApplicationData() {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -44,20 +44,9 @@ export default function useApplicationData(initial) {
 
     //makes a PUT request to update the database with the interview data
     return axios
-    .put(`/api/appointments/${id}`, {interview})
-    .then(res => {
-      
-      setState({ ...state, appointments, days });
-      // setState(prev => {
-      //   const days = prev.days.map(day => {
-      //     if(day.name === prev.day) {
-      //       day.spots -- ;
-      //     }
-      //     return day;
-      //   });
-      //   return { ...prev, appointments, days };
-      // });
-      
+      .put(`/api/appointments/${id}`, {interview})
+      .then(() => {
+        setState({ ...state, appointments, days });  
     })
   };
 
@@ -68,22 +57,10 @@ export default function useApplicationData(initial) {
     const days = updateSpots();
     
     return axios
-    .delete(`/api/appointments/${id}`)
-    .then(res => {
-      setState({ ...state, appointments, days });
-      //before: setState(prev => ({ ...prev, appointments: {...prev.appointments, appointment} })))
-
-      //updates the spots remaining when delete the appointment
-      // setState(prev => {
-      //   const days = prev.days.map(day => {
-      //     if(day.name === prev.day) {
-      //       day.spots ++;
-      //     }
-      //     return day;
-      //   });
-      //   return { ...prev, appointments, days };
-      // });
-    })
+      .delete(`/api/appointments/${id}`)
+      .then(() => {
+        setState({ ...state, appointments, days });
+      })
   };
 
   useEffect(() => {

@@ -1,4 +1,16 @@
 # Interview Scheduler
+- A single page application (SPA), built using React and API server that allows users to book, edit, and cancel interviews. Testing permormed with Jest, Storybook, and Cypress. 
+
+## Final Product
+
+["Main page"]()
+
+## Dependencies
+- React
+- Axios
+- Webpack, Babel
+- Storybook, Webpack Dev Server, Jest, Testing Library, Cypress
+
 
 ## Setup
 
@@ -15,9 +27,17 @@ npm start
 ```sh
 npm test
 ```
+```sh
+npm test -- --coverage --watchAll=false
+```
 
 ## Running Storybook Visual Testbed
 
 ```sh
 npm run storybook
+```
+## Scheduler API server
+
+```sh
+git clone https://github.com/lighthouse-labs/scheduler-api.git
 ```

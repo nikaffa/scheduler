@@ -21,8 +21,9 @@ const Appointment = (props) => {
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
 
-  //conditinally renders a mode within calling useVisualMode:
-  //if props.interview contains a value, pass useVisualMode the SHOW mode, otherwise, pass EMPTY
+  /*conditinally renders a mode within calling useVisualMode:
+   *if props.interview contains a value, pass useVisualMode the SHOW mode, otherwise, pass EMPTY
+   */
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
