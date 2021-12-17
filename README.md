@@ -3,7 +3,7 @@
 
 ## Final Product
 
-["Users scan create, edit, and cancel interviews"](https://github.com/nikaffa/scheduler/blob/master/docs/Scheduler.gif)
+!["Users scan create, edit, and cancel interviews"](https://github.com/nikaffa/scheduler/blob/master/docs/Scheduler.gif)
 
 ## Dependencies
 - React
