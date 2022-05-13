@@ -1,4 +1,4 @@
 {
   "extends": "react-app",
-  "parser": "react-scripts/node_modules/babel-eslint"
+  "parser": "@babel/eslint-parser"
 }
